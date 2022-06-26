@@ -23,7 +23,7 @@ export default function TodoList({ tasks, setTasks }: Props) {
         <Task taskItem={task} key={task.id} tasks={tasks} setTasks={setTasks} />
       ))}
       <hr />
-      <p>{time}</p>
+      <p className={TodoListCss.time}>{time}</p>
     </div>
   );
 }
