@@ -22,8 +22,6 @@ function Todo() {
       setTask('');
     }
   };
-
-  console.log(tasks);
   return (
     <div className={TodoCss.App}>
       <span className={TodoCss.heading}>Todo App</span>

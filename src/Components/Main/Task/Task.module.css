@@ -5,4 +5,50 @@
   justify-content: space-between;
   margin-top: 1rem;
   padding: 1rem;
+  transition: all 0.5s ease;
+}
+
+.taskItemIcons,
+.taskItemIconMenu {
+  border-radius: 0.3rem;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  padding: 0.5rem;
+  transition: all 0.5s ease;
+}
+
+.taskItemIcons:hover,
+.taskItemIconMenu:hover {
+  background-color: rgb(192, 110, 3);
+  color: white;
+}
+
+.taskItemIconMenu {
+  display: none;
+}
+
+.taskItemIconsContainer {
+  display: flex;
+}
+
+.taskItemText {
+  flex: 1;
+  padding: 0.5rem;
+  transition: all 0.5s ease;
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 768px) {
+  .taskItemIconsContainer {
+    flex-direction: column;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .taskItemIconsContainer {
+    display: none;
+  }
+  .taskItemIconMenu {
+    display: block;
+  }
 }
