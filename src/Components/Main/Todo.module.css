@@ -9,6 +9,11 @@
   height: 200vh;
 }
 
+.footer {
+  color: black;
+  font-size: small;
+}
+
 .heading {
   color: rgb(250, 142, 0);
   font-family: Lobster;
@@ -17,6 +22,11 @@
   margin: 3rem 0 1rem 0;
   text-align: center;
   z-index: 1;
+}
+
+.socialLink {
+  color: rgb(250, 142, 0);
+  text-decoration: none;
 }
 
 @media (max-width: 768) {

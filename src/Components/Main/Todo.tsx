@@ -27,6 +27,12 @@ function Todo() {
       <span className={TodoCss.heading}>Todo App</span>
       <InputField task={task} setTask={setTask} addInput={addInput} />
       <TodoList tasks={tasks} setTasks={setTasks} />
+      <p className={TodoCss.footer}>
+        Copyrights: Seun Daniel Omatsola{' '}
+        <a href='https://github.com/Vastro-lorde' className={TodoCss.socialLink}>
+          @Vastro-lorde
+        </a>
+      </p>
     </div>
   );
 }

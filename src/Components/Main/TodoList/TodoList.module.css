@@ -6,6 +6,12 @@
   transition: 2s ease;
 }
 
+hr {
+  background-color: rgb(192, 110, 3);
+  border: 0.1rem solid rgb(192, 110, 3);
+  margin: 1rem 0;
+}
+
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (max-width: 768px) {
   .todoList {

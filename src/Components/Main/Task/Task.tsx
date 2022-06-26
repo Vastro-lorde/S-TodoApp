@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { TaskModel } from '../models/model';
 import TaskCss from './Task.module.css';
 import { FaEdit } from 'react-icons/fa';
@@ -14,6 +14,8 @@ interface Props {
 }
 
 const Task: React.FC<Props> = ({ taskItem, tasks, setTasks }) => {
+  const [edit, setEdit] = useState<boolean>(false);
+  const [editTask, setEditTask] = useState<string>(taskItem.task);
   const iconsContainer = useRef<HTMLDivElement>(null);
   const showMenu = () => {
     if (iconsContainer.current?.style.display === 'flex') {
@@ -26,13 +28,29 @@ const Task: React.FC<Props> = ({ taskItem, tasks, setTasks }) => {
   const changeDone = (id: string) => {
     setTasks(tasks.map((task) => (task.id === id ? { ...task, done: !task.done } : task)));
   };
+
   const deleteTaskItem = (id: string) => {
     setTasks(tasks.filter((task) => task.id !== id));
   };
+
+  const editTaskItem = (id: string, e: React.FormEvent) => {
+    e.preventDefault();
+    setTasks(tasks.map((task) => (task.id === id ? { ...task, task: editTask } : task)));
+    setEdit(false);
+  };
   console.log(tasks);
+
   return (
-    <form action='' className={TaskCss.taskItem}>
-      {taskItem.done ? (
+    <form action='' className={TaskCss.taskItem} onSubmit={(e) => editTaskItem(taskItem.id, e)}>
+      {edit ? (
+        <input
+          type='text'
+          className={TaskCss.taskItemTextInput}
+          value={editTask}
+          placeholder='Edit Task'
+          onChange={(e) => setEditTask(e.target.value)}
+        />
+      ) : taskItem.done ? (
         <s className={TaskCss.taskItemText}>{taskItem.task}</s>
       ) : (
         <span className={TaskCss.taskItemText}>{taskItem.task}</span>
@@ -42,7 +60,7 @@ const Task: React.FC<Props> = ({ taskItem, tasks, setTasks }) => {
           <GiHamburgerMenu />
         </span>
         <div className={TaskCss.taskItemIconsContainer} ref={iconsContainer}>
-          <span className={TaskCss.taskItemIcons}>
+          <span className={TaskCss.taskItemIcons} onClick={() => setEdit(!taskItem.done)}>
             <FaEdit />
           </span>
           <span className={TaskCss.taskItemIcons} onClick={() => changeDone(taskItem.id)}>
