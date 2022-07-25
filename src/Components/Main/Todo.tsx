@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { InputField } from './InputField/InputField';
 import { TaskModel } from './models/model';
 import TodoCss from './Todo.module.css';
@@ -7,6 +7,15 @@ import TodoList from './TodoList/TodoList';
 function Todo() {
   const [task, setTask] = useState<string>('');
   const [tasks, setTasks] = useState<TaskModel[]>([]);
+
+  useEffect(() => {
+    const newObject = JSON.parse(localStorage.getItem('tasks') as any);
+    if (newObject === null) {
+      setTasks([]);
+    } else {
+      setTasks(newObject);
+    }
+  }, []);
 
   const addInput = (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,6 +30,7 @@ function Todo() {
       ]);
       setTask('');
     }
+    localStorage.setItem('tasks', JSON.stringify(tasks));
   };
   return (
     <div className={TodoCss.App}>
