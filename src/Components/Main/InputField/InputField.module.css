@@ -29,6 +29,7 @@
   font-size: 1.5rem;
   padding: 1.5rem;
   position: absolute;
+  cursor: pointer;
   right: 0;
   transition: 0.5s ease all;
 }
