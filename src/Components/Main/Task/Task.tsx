@@ -6,6 +6,7 @@ import { FaEdit } from 'react-icons/fa';
 import { MdDone } from 'react-icons/md';
 import { RiDeleteBack2Fill } from 'react-icons/ri';
 import { GiHamburgerMenu } from 'react-icons/gi';
+import { STORENAME } from '../../Constants';
 
 interface Props {
   taskItem: TaskModel;
@@ -26,19 +27,24 @@ const Task: React.FC<Props> = ({ taskItem, tasks, setTasks }) => {
   };
 
   const changeDone = (id: string) => {
-    setTasks(tasks.map((task) => (task.id === id ? { ...task, done: !task.done } : task)));
+    const newTasks:TaskModel[] = tasks.map((task) => (task.id === id ? { ...task, done: !task.done } : task))
+    setTasks(()=> newTasks);
+    localStorage.setItem(STORENAME, JSON.stringify(newTasks))
   };
 
   const deleteTaskItem = (id: string) => {
-    setTasks(tasks.filter((task) => task.id !== id));
+    const newTasks:TaskModel[] = tasks.filter((task) => task.id !== id)
+    setTasks(()=> newTasks);
+    localStorage.setItem(STORENAME, JSON.stringify(newTasks))
   };
 
   const editTaskItem = (id: string, e: React.FormEvent) => {
     e.preventDefault();
-    setTasks(tasks.map((task) => (task.id === id ? { ...task, task: editTask } : task)));
+    const newTasks:TaskModel[] = tasks.map((task) => (task.id === id ? { ...task, task: editTask } : task));
+    setTasks(()=> newTasks);
+    localStorage.setItem(STORENAME, JSON.stringify(newTasks))
     setEdit(false);
   };
-  console.log(tasks);
 
   return (
     <form action='' className={TaskCss.taskItem} onSubmit={(e) => editTaskItem(taskItem.id, e)}>

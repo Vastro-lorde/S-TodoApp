@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { InputField } from './InputField/InputField';
-import { TaskModel } from './models/model';
-import TodoCss from './Todo.module.css';
-import TodoList from './TodoList/TodoList';
+import React, { useEffect, useState } from "react";
+import { InputField } from "./InputField/InputField";
+import type { TaskModel } from "./models/model";
+import TodoCss from "./Todo.module.css";
+import TodoList from "./TodoList/TodoList";
+import { STORENAME } from "../Constants";
 
 function Todo() {
   const [task, setTask] = useState<string>('');
@@ -30,7 +31,14 @@ function Todo() {
       ]);
       setTask('');
     }
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+    localStorage.setItem(STORENAME, JSON.stringify([
+      ...tasks,
+      {
+        id: Date.now().toString(),
+        task: task,
+        done: false,
+      },
+    ]));
   };
   return (
     <div className={TodoCss.App}>
